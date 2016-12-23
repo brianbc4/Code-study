@@ -9,18 +9,42 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-	private String jsonStr = "[\n" +
-			"    {\n" +
-			"        \"chanel\":\"FM\",\n" +
-			"        \"week\":\"日\",\n" +
-			"        \"start_time\":\"09:00\",\n" +
-			"        \"end_time\":\"10:00\",\n" +
-			"        \"program\":\"勞動聲活\",\n" +
-			"        \"DJ\":\"【北市勞動局合作】\"\n" +
-			"    }\n" +
-			"]";
+
+	private String jsonStr =       /*一組JSON*/
+					"    {\n" +
+					"        \"chanel\":\"FM\",\n" +
+					"        \"week\":\"日\",\n" +
+					"        \"start_time\":\"09:00\",\n" +
+					"        \"end_time\":\"10:00\",\n" +
+					"        \"program\":\"勞動聲活\",\n" +
+					"        \"DJ\":\"【北市勞動局合作】\"\n" +
+					"    }\n" ;
+
+
+
+//	private String jsonStr =      /*多組JSON*/
+//			"[\n" +
+//			"    {\n" +
+//			"        \"chanel\":\"FM\",\n" +
+//			"        \"week\":\"日\",\n" +
+//			"        \"start_time\":\"09:00\",\n" +
+//			"        \"end_time\":\"10:00\",\n" +
+//			"        \"program\":\"勞動聲活\",\n" +
+//			"        \"DJ\":\"【北市勞動局合作】\"\n" +
+//			"    }\n" +
+//			"    ,{\n" +
+//			"        \"chanel\":\"FM\",\n" +
+//			"        \"week\":\"日\",\n" +
+//			"        \"start_time\":\"09:00\",\n" +
+//			"        \"end_time\":\"10:00\",\n" +
+//			"        \"program\":\"勞動聲活\",\n" +
+//			"        \"DJ\":\"【北市勞動局合作】\"\n" +
+//			"    }\n" +
+//			"]";
+
 
 	private TextView showGSon,showString;
 	@Override
@@ -31,17 +55,24 @@ public class MainActivity extends AppCompatActivity {
 		showString = (TextView) findViewById(R.id.show_string);
 		showGSon = (TextView) findViewById(R.id.show_GSON);
 
-		Gson gson = new Gson();
-		Type listType = new TypeToken<ArrayList<MyJsonObj>>() {}.getType();
-		ArrayList<MyJsonObj> jsonArr = gson.fromJson(jsonStr, listType);
 		StringBuffer sb = new StringBuffer();
-		for(MyJsonObj obj : jsonArr){
-			sb.append("obj chanel:" + obj.getChanelStr() + "\n");
-			sb.append("obj start time:" + obj.getStartTime() + "\n");
-			sb.append("obj end time:" + obj.getEndTime() + "\n");
-			sb.append("obj week:" + obj.getWeekStr() + "\n");
-			sb.append("obj DJ:" + obj.getDjStr() + "\n");
-		}
+
+
+		MyJsonObj Myobj = new Gson().fromJson(jsonStr, MyJsonObj.class);
+		sb.append("obj chanel:" + Myobj.getChanelStr() + "\n");
+
+
+//		Gson gson = new Gson();
+//		Type listType = new TypeToken<ArrayList<MyJsonObj>>() {}.getType();
+//		ArrayList<MyJsonObj> jsonArr = gson.fromJson(jsonStr, listType);
+
+//		for(MyJsonObj obj : jsonArr){
+//			sb.append("obj chanel:" + obj.getChanelStr() + "\n");
+//			sb.append("obj start time:" + obj.getStartTime() + "\n");
+//			sb.append("obj end time:" + obj.getEndTime() + "\n");
+//			sb.append("obj week:" + obj.getWeekStr() + "\n");
+//			sb.append("obj DJ:" + obj.getDjStr() + "\n");
+//		}
 
 		showString.setText(jsonStr);
 

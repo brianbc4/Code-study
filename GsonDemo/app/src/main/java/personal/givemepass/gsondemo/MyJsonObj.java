@@ -20,7 +20,6 @@ public class MyJsonObj {
 
 	@SerializedName("DJ")
 	private String djStr;
-
 	public String getDjStr() {
 		return djStr;
 	}
