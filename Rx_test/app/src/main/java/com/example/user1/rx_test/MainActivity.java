@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
             public void onError(Throwable e) { }
         };
 
-//        myObservable.subscribe(mySubscriber);
+        myObservable.subscribe(mySubscriber);
 
 
-        Action1<String> onNextAction = new Action1<String>() {
-            @Override
-            public void call(String s) {
-                Log.d("Rx",s);
-            }
-        };
+//        Action1<String> onNextAction = new Action1<String>() {
+//            @Override
+//            public void call(String s) {
+//                Log.d("Rx",s);
+//            }
+//        };
 
 //        myObservable.subscribe(onNextAction);   // Outputs "Hello, world!"
 
@@ -77,15 +77,15 @@ public class MainActivity extends AppCompatActivity {
 //                .map(new Func1<String, String>() {
 //                    @Override
 //                    public String call(String s) {
-//                        return s + " -Dan";
+//                        return s + " -Hao";
 //                    }
 //                })
 //                .subscribe(s -> Log.d("Rx",s));
 
 /*lambda*/
-        Observable.just("Hello, world!")
-                .map(s -> s + " -Dan")
-                .subscribe(s -> Log.d("Rx",s));
+//        Observable.just("Hello, world!")
+//                .map(s -> s + " -Dan")
+//                .subscribe(s -> Log.d("Rx",s));
 
     }
 }
