@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements TabsListener {
 
         // Set a toolbar which will replace the action bar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
         // Setup the viewPager
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -61,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements TabsListener {
 
 
 
-    private class MyPagerAdapter
-            extends FragmentStatePagerAdapter
+private class MyPagerAdapter extends FragmentStatePagerAdapter
     {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -71,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements TabsListener {
 
         @Override
         public Fragment getItem(int pos) {
+            Log.d("getItem",pos+"");
             return fragmentList.get(pos);
         }
 

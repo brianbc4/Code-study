@@ -1,0 +1,78 @@
+=======V(View)===========
+
+mPresenter.getItemDetail(mStrItemId);
+
+=======P(Presenter)===========
+
+    public void getItemDetail(String itemId) {
+        view.showProgress();
+        ProductRepository.getInstance().getItemDetail(itemId)
+                .compose(RxUtil.mainAsync())
+                .compose(RxUtil.bindLifecycle(view))
+                .doAfterTerminate(() -> view.hideProgress())
+                .subscribe(itemDetail -> {
+                    this.itemDetail = itemDetail;
+                    view.onGetItemDetail(itemDetail);
+                    new UserBehaviorSender().sendItemDetailDisplay(itemDetail);
+                }, throwable -> view.onGetItemDetailError(throwable));
+    }
+
+=======M (Model)===========
+Repositories >
+
+    public Observable<ItemDetail> getItemDetail(String itemId) {
+        return NetworkService.getInstance().getProductApi().callItemDetail(FUNC.ITEM_DETAIL, itemId, "json")
+                .map(ItemDetailResponse::getRtn);
+    }
+
+NetworkService > 
+
+    public static NetworkService getInstance() {
+        return INSTANCE != null ? INSTANCE : (INSTANCE = new NetworkService());
+    }
+
+    public Api getProductApi() {
+        return INSTANCE.api;
+    }
+
+API >
+
+    @GET("/?callfrom=app")
+    Observable<ItemDetailResponse> callItemDetail(@Query("func") String fun, @Query("item") String itemId, @Query("ver") String ver);
+	
+	
+
+Response>
+
+@Getter
+public class ItemDetailResponse extends BaseResponse{
+
+    private ItemDetail rtn;
+}
+
+@Getter
+public class BaseResponse {
+
+    private boolean result;
+    private String msg;
+    private String time;
+}
+
+
+Models>
+
+@Getter
+@Setter
+public class ItemDetail {
+
+    private Online online;
+    private Info info;
+    private List<Spec> specs = new ArrayList<>();
+    private List<Sale> sales = new ArrayList<>();
+    private List<Img> img = new ArrayList<>();
+    private List<Tag> tags = new ArrayList<>();
+//    private List<FtRule> ftRule = new ArrayList<>();
+    private String return_notice;
+    private String deliver_notic;
+}
+

@@ -1,0 +1,36 @@
+RxJava
+
+http://gank.io/post/560e15be2dca930e00da1083#toc_1
+
+http://www.itread01.com/articles/1476220523.html
+
+http://rxmarbles.com/#scan
+
+https://yongjhih.gitbooks.io/feed/content/rxandroid.html
+
+http://tomstechnicalblog.blogspot.tw/2016/02/rxjava-understanding-observeon-and.html
+
+https://github.com/cn-ljb/rxjava_for_android
+
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0430/2815.html
+
+Android MVP+Retrofit+RxJava??小?
+http://wuxiaolong.me/2016/06/12/mvpRetrofitRxjava/
+
+用工厂流水?的方式?理解 RxJava 的概念
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0429/4196.html
+
+RxJava?源合集－??RxJava,看?里就?了
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0505/7912.html
+
+RxJava操作符
+http://mushuichuan.com/2015/12/11/rxjava-operator-1/
+
+RxJava PowerPoint
+https://www.slideshare.net/ssuser72c3b0/rxjava-android-rxjava
+
+//==================================
+
+Android-architecture  (MVP)
+
+https://github.com/googlesamples/android-architecture
