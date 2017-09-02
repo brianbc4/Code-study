@@ -1,19 +1,26 @@
 =======V(View)===========
+ProductDetailActivity >
 
-mPresenter.getItemDetail(mStrItemId);
+	presenter.getItemDetail(itemId);
+
+    public void onGetItemDetail(ItemDetail itemDetail) {
+        adapter.setItemDetail(itemDetail);
+        adapter.setIsTravelTag(presenter.isTravelTag(itemDetail.getInfo().getMain_tag()));
+        presenter.countDown(itemDetail.getOnline().getDate_offline());
+    }
 
 =======P(Presenter)===========
+ProductDetailPresenter >
 
     public void getItemDetail(String itemId) {
         view.showProgress();
-        ProductRepository.getInstance().getItemDetail(itemId)
+        ProductRepository.getInstance()
+				.getItemDetail(itemId)
                 .compose(RxUtil.mainAsync())
                 .compose(RxUtil.bindLifecycle(view))
                 .doAfterTerminate(() -> view.hideProgress())
                 .subscribe(itemDetail -> {
-                    this.itemDetail = itemDetail;
                     view.onGetItemDetail(itemDetail);
-                    new UserBehaviorSender().sendItemDetailDisplay(itemDetail);
                 }, throwable -> view.onGetItemDetailError(throwable));
     }
 
@@ -40,6 +47,24 @@ API >
     @GET("/?callfrom=app")
     Observable<ItemDetailResponse> callItemDetail(@Query("func") String fun, @Query("item") String itemId, @Query("ver") String ver);
 	
+/*
+{  
+   "result":true,
+   "msg":"[2]",
+   "time":"2017-09-02 13:31:12",
+   "rtn":{  
+      "online":{  },
+      "info":{  },
+      "specs":[  ],
+      "sales":[  ],
+      "img":[  ],
+      "tags":[  ],
+      "ftRule":[  ],
+      "return_notice":"...",
+      "deliver_notic":"..."
+   }
+}
+*/
 	
 
 Response>
