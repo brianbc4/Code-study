@@ -13,7 +13,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"/>
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabButton"
             android:layout_width="56dp"
             android:layout_height="56dp"
