@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity implements TabsListener {
         tabTitles.add("Tab 2");
         tabTitles.add("Tab 3");
 
-        // Set a toolbar which will replace the action bar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         // Setup the viewPager
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
