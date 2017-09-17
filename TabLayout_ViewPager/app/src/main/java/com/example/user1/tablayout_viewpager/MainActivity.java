@@ -5,104 +5,66 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-
+import android.view.Menu;
+import android.view.MenuItem;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements TabsListener {
-    private List<Fragment> fragmentList = new ArrayList<>();
-    private List<String> tabTitles = new ArrayList<>();
-    private MyPagerAdapter pagerAdapter;
+
+public class MainActivity extends AppCompatActivity {
+    private PagerAdapter pagerAdapter;
     private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        fragmentList.add(Fragment1.newInstance());
-        fragmentList.add(Fragment2.newInstance());
-        fragmentList.add(Fragment3.newInstance());
-
-        tabTitles.add("Tab 1");
-        tabTitles.add("Tab 2");
-        tabTitles.add("Tab 3");
-
+        Toolbar toolBar = (Toolbar) findViewById(R.id.toolbar);
+        onCreateMenu(toolBar);
 
         // Setup the viewPager
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), new ArrayList<Fragment>());
         viewPager.setAdapter(pagerAdapter);
 
         // Setup the Tabs
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout = (TabLayout) findViewById(R.id.tab_bar);
         // This method ensures that tab selection events update the ViewPager and page changes update the selected tab.
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    @Override
-    public void onTabAdded() {
-        pagerAdapter.addTab(Fragment1.newInstance(), "Tab " + (tabTitles.size() + 1));
+    public void onCreateMenu(Toolbar toolbar){
+        setSupportActionBar(toolbar);
+        setTitle("");
     }
 
     @Override
-    public void onTabRemoved() {
-        pagerAdapter.removeTab(1);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-
-
-private class MyPagerAdapter extends FragmentStatePagerAdapter
-    {
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
+        if (id == R.id.delete) {
+            pagerAdapter.removePage();
         }
-
-
-        @Override
-        public Fragment getItem(int pos) {
-            Log.d("getItem",pos+"");
-            return fragmentList.get(pos);
+        if(id == R.id.add){
+            pagerAdapter.addPage();
         }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
+        if (id == R.id.generatte){
+            int page = 5;
+            viewPager.setOffscreenPageLimit(page);
+            pagerAdapter.autoGenerate(page);
         }
-
-
-        // This is called when notifyDataSetChanged() is called. Without this, getItem() is not triggered
-        @Override
-        public int getItemPosition(Object object) {
-            // refresh all fragments when data set changed
-            return PagerAdapter.POSITION_NONE;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tabTitles.get(position);
-        }
-
-        public void addTab(Fragment fragment, String tabTitle) {
-            fragmentList.add(fragment);
-            tabTitles.add(tabTitle);
-            notifyDataSetChanged();
-            Log.d("test",""+fragmentList.size());
-        }
-
-        public void removeTab(int tabPosition) {
-            if (fragmentList.size()>1) {
-                fragmentList.remove(tabPosition);
-                tabTitles.remove(tabPosition);
-                notifyDataSetChanged();
-                Log.d("test",""+fragmentList.size());
-            }
-        }
+        return super.onOptionsItemSelected(item);
     }
+
 }
