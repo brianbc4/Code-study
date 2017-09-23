@@ -8,9 +8,9 @@ import retrofit2.http.Query;
 
 
 public interface ApiInterface {
-    @GET("movie/top_rated")
+    @GET("movie/top_rated")     // http://api.themoviedb.org/3/movie/top_rated?api_key=7e8f60e325cd06e164799af1e317d7a7
     Call<MoviesResponse> getTopRatedMovies(@Query("api_key") String apiKey);
 
-    @GET("movie/{id}")
+    @GET("movie/{id}")          // http://api.themoviedb.org/3/movie/19404?api_key=7e8f60e325cd06e164799af1e317d7a7
     Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
 }
