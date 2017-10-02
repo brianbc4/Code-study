@@ -1,5 +1,6 @@
 package info.androidhive.retrofit.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import info.androidhive.retrofit.activity.MovieDetailActivity;
 import info.androidhive.retrofit.adapter.holder.MovieViewHolder;
 import info.androidhive.retrofit.model.Movie;
 
@@ -16,12 +18,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     private List<Movie> movies;
     private int rowLayout;
-    private Context context;
+    private Activity activity;
 
-    public MoviesAdapter(List<Movie> movies, int rowLayout, Context context) {
+    public MoviesAdapter(List<Movie> movies, int rowLayout, Activity activity) {
         this.movies = movies;
         this.rowLayout = rowLayout;
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -42,7 +44,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         holder.data.setText(movies.get(position).getReleaseDate());
         holder.movieDescription.setText(movies.get(position).getOverview());
         holder.rating.setText(movies.get(position).getVoteAverage().toString());
-        Log.v("B_ID",movies.get(position).getId()+"");
+        holder.moviesLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MovieDetailActivity.startActivity(activity,movies.get(position).getId());
+//                Log.v("B_ID",movies.get(position).getId()+"");
+            }
+        });
+
+
+
     }
 
 

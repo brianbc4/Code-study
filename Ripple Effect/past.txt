@@ -1,0 +1,18 @@
+layout_XXX.xml
+
+       android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:foreground="@drawable/ripple_black"
+
+
+color.xml
+
+    <color name="black_alpha75">#BF000000</color>
+    <color name="black_alpha50">#70000000</color>
+
+
+past "drawable-v21" folder under the "res" folder 
+
+
+
+

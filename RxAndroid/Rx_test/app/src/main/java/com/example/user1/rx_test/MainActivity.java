@@ -113,11 +113,11 @@ public class MainActivity extends AppCompatActivity {
 //            Log.d("Rx", "Lambda:" +s );
 //        });
 
-//        myCreateObservable.subscribe(mySubscriber);      //mySubscriber: myObservable1
-//
-//        myJustObservable.subscribe(mySubscriber);      //mySubscriber: myObservable1
-//
-//        myJustObservable.subscribe(onNextAction);      //onNextAction: myObservable1
+        myCreateObservable.subscribe(mySubscriber);      //mySubscriber: myCreateObservable
+
+        myJustObservable.subscribe(mySubscriber);      //mySubscriber: myJustObservable
+
+        myJustObservable.subscribe(onNextAction);      //onNextAction: myJustObservable
 
 
 
@@ -178,21 +178,22 @@ public class MainActivity extends AppCompatActivity {
 
 //=============================在更新後發佈最新狀態============================================
 
+        rxIcon.setOnClickListener(view -> {
+            subscribeNumber.onNext(7);     //更新給訂閱者的參數
+        });
+
         Observable.create(
-                (Observable.OnSubscribe<Integer>) subscriber -> subscribeNumber = subscriber)
+                (Observable.OnSubscribe<Integer>) subscriber -> {
+                    subscribeNumber = subscriber;       //subscriber初始化,之後狀態有變化會通知observable
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(integer -> integer+6)   //傳進來的值先做處理
                 .filter(integer -> integer.equals(13))   //判斷值的內容
                 .subscribe(number -> {
                     rxIcon.setText("Complete!");
-                    this.valueChange(number);   //method reference -> this::valueChange
+                    this.valueChange(number);
                 }, Throwable::printStackTrace);
-
-
-        rxIcon.setOnClickListener(view -> {
-            subscribeNumber.onNext(7);     //傳送並更改給訂閱者的參數
-        });
 
     }
 

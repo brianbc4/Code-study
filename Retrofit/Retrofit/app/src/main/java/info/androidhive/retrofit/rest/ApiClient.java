@@ -9,8 +9,7 @@ public class ApiClient {
     public static final String BASE_URL = "http://api.themoviedb.org/3/";
     private static Retrofit retrofit = null;
 
-
-    public static Retrofit getClient() {
+    private static Retrofit getClient() {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -19,4 +18,10 @@ public class ApiClient {
         }
         return retrofit;
     }
+
+    public static ApiInterface getApiService(){
+        return getClient().create(ApiInterface.class);
+    }
+
+
 }

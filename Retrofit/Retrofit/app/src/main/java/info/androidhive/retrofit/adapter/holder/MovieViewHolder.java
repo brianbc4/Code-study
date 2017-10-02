@@ -9,7 +9,7 @@ import android.widget.TextView;
 import info.androidhive.retrofit.R;
 
 public class MovieViewHolder extends RecyclerView.ViewHolder {
-    LinearLayout moviesLayout;
+    public LinearLayout moviesLayout;
     public TextView movieTitle;
     public TextView data;
     public TextView movieDescription;
