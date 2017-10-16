@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        rView.setLayoutManager(gridLayout);
-//        rView.setLayoutManager(linearLayout);
+//        rView.setLayoutManager(gridLayout);
+        rView.setLayoutManager(linearLayout);
 //        rView.setLayoutManager(staggeredGridLayout);
 
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         allItems.add(new ItemObject("Sweden", R.drawable.five,ItemObject.TYPE_TWO));
         allItems.add(new ItemObject("United Kingdom", R.drawable.six,ItemObject.TYPE_TWO));
         allItems.add(new ItemObject("Germany", R.drawable.seven,ItemObject.TYPE_TWO));
-        allItems.add(new ItemObject("Sweden", R.drawable.eight,ItemObject.TYPE_TWO));
+        allItems.add(new ItemObject("Sweden", R.drawable.eight));
 
         return allItems;
     }

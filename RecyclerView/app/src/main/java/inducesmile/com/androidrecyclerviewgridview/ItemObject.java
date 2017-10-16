@@ -10,6 +10,11 @@ public class ItemObject {
     private String type;
     private int photo;
 
+    public ItemObject(String name, int photo) {
+        this.name = name;
+        this.photo = photo;
+    }
+
     public ItemObject(String name, int photo, String type) {
         this.name = name;
         this.photo = photo;

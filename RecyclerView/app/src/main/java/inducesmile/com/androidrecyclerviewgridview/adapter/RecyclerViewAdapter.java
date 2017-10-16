@@ -13,9 +13,10 @@ import inducesmile.com.androidrecyclerviewgridview.ItemObject;
 import inducesmile.com.androidrecyclerviewgridview.R;
 import inducesmile.com.androidrecyclerviewgridview.holder.CardHolder1;
 import inducesmile.com.androidrecyclerviewgridview.holder.CardHolder2;
+import inducesmile.com.androidrecyclerviewgridview.holder.NormalHolder;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    final int NONE=0;
     final int TYPE_ONE=1;
     final int TYPE_TWO=2;
     private final Context context;
@@ -34,12 +35,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        switch (itemList.get(position).getType()){
-            case ItemObject.TYPE_ONE:
-                return TYPE_ONE;
-            default:
-                return TYPE_TWO;
+        if(itemList.get(position).getType()!=null) {
+            switch (itemList.get(position).getType()) {
+                case ItemObject.TYPE_ONE:
+                    return TYPE_ONE;
+                default:
+                    return TYPE_TWO;
+            }
         }
+        return NONE;
     }
 
     @Override
@@ -48,8 +52,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         switch (viewType){
             case TYPE_ONE:
                 return new CardHolder1(inflater.inflate(R.layout.holder_card_one, null));
-            default:
+            case TYPE_TWO:
                 return new CardHolder2(inflater.inflate(R.layout.holder_card_two, null));
+            default:
+                return new NormalHolder(inflater.inflate(R.layout.holder_normal,null));
         }
 
     }
@@ -71,6 +77,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((CardHolder2)holder).countryName.setText(itemList.get(position).getName());
             ((CardHolder2)holder).countryPhoto.setImageResource(itemList.get(position).getPhoto());
         }
+        if(holder instanceof NormalHolder) {
+            ((NormalHolder) holder).countryPhoto.setImageResource(itemList.get(position).getPhoto());
+            ((NormalHolder) holder).countryName.setText(itemList.get(position).getName());
+        }
+
     }
 
 }
