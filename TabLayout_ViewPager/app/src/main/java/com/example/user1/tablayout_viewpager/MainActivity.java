@@ -2,16 +2,11 @@ package com.example.user1.tablayout_viewpager;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Setup the viewPager
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), new ArrayList<Fragment>());
+        viewPager.beginFakeDrag(); //讓頁面無法滑動
+
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
         // Setup the Tabs

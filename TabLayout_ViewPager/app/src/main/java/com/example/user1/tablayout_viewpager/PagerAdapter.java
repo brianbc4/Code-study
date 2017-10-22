@@ -1,9 +1,12 @@
 package com.example.user1.tablayout_viewpager;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
+
+import com.example.user1.tablayout_viewpager.fragment.NormalFragment;
+import com.example.user1.tablayout_viewpager.fragment.RecycleViewFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +17,19 @@ import java.util.List;
 
 
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class PagerAdapter
+        extends FragmentStatePagerAdapter
+{
 
 
+    private Activity activity;
     private List<Fragment> fragments;
 
 
-    public PagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
+    public PagerAdapter(FragmentManager fm) {
         super(fm);
-        this.fragments = fragments;
+        fragments = new ArrayList<Fragment>();
+        fragments.add(RecycleViewFragment.newInstance());
     }
 
 
@@ -34,8 +41,8 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {     //生成Fragment
-//        return fragments.get(position);
-        return MyFragment.newInstance(position);
+
+            return fragments.get(position);
     }
 
     @Override
@@ -46,7 +53,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     //================================================
     public void addPage(){
-        fragments.add(MyFragment.newInstance(fragments.size()+1));
+        fragments.add(NormalFragment.newInstance(fragments.size()));
         notifyDataSetChanged();
     }
 
@@ -57,7 +64,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     void autoGenerate(int num){       //產生新的VierPager內容物件
         for(int i=1; i<=num;i++){
-            fragments.add(MyFragment.newInstance(i));
+            fragments.add(NormalFragment.newInstance(i));
         }
         notifyDataSetChanged();
     }
