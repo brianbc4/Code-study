@@ -8,27 +8,30 @@ import android.view.ViewGroup;
 import com.example.user1.tablayout_viewpager.R;
 import com.example.user1.tablayout_viewpager.recyclerview.holder.Holder;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 
 /**
  * Created by daffer on 2017/10/21.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public  class RecyclerViewAdapter
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
     private final Context context;
 
+    private List<String> items = new ArrayList<>();
 
-    public RecyclerViewAdapter(Context context) {
+    public RecyclerViewAdapter(Context context, List<String> items) {
         this.context = context;
+        this.items.addAll(items);
     }
 
     @Override
     public int getItemCount() {
-        return 10;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 0;
+        return items.size();
     }
 
     @Override
@@ -43,5 +46,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((Holder)holder).text.setText("Position: "+position);
         }
 
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(items,fromPosition,toPosition);
+        notifyItemMoved(fromPosition,toPosition);
+        return true;
     }
+
+    public void onItemDismiss(int position) {
+        items.remove(position);
+        notifyItemRemoved(position);
+    }
+}
 

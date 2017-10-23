@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">DD_TabLayout_ViewPager</string>
+
+
+    <array name="items">
+        <item>鼠</item>
+        <item>龍</item>
+        <item>虎</item>
+        <item>兔</item>
+    </array>
+
+</resources>

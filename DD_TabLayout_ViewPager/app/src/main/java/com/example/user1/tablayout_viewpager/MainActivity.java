@@ -56,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
             pagerAdapter.addPage();
         }
         if (id == R.id.generatte){
-            int page = 5;
-            viewPager.setOffscreenPageLimit(page);
-            pagerAdapter.autoGenerate(page);      //
+//            int page = 5;
+//            viewPager.setOffscreenPageLimit(page);
+//            pagerAdapter.autoGenerate(page);
+            Main2Activity.startActivity(this);
         }
         return super.onOptionsItemSelected(item);
     }

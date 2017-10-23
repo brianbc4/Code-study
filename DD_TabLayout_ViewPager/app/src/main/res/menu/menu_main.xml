@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <!--
+    orderInCategory = 以數字大小依序由左到右
+    showAsAction=["ifRoom" | "never" | "withText" | "always" | "collapseActionView"]
+    -->
+
+    <item
+        android:id="@+id/generatte"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Generate"
+        app:showAsAction="always" />
+
+
+    <item android:id="@+id/add"
+        android:title="Add"
+        android:icon="@drawable/add"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/delete"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="Delete"
+        app:showAsAction="always"
+        />
+
+
+
+
+
+
+</menu>
